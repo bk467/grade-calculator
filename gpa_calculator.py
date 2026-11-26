@@ -39,6 +39,21 @@ def course_grade():
     print("\nWeight graded so far:", round(total_weight, 2), "%")
     print("Current grade:", round(grade, 2), "%")
 
+def score_needed():
+    current = ask_number("\nYour current grade (%): ", 0, 100)
+    exam_weight = ask_number("Weight of the exam (%): ", 1, 100)
+    target = ask_number("Final grade you want (%): ", 0, 100)
+
+    w = exam_weight / 100
+    needed = (target - current * (1 - w)) / w
+
+    if needed > 100:
+        print("You would need", round(needed, 2), "%, which is not possible LOL you're cooked")
+    elif needed <= 0:
+        print("You already have", target, "% even with a 0 on the exam, you're chilling")
+    else:
+        print("You need", round(needed, 2), "% on the exam, you got this bro")
+
 
 def show_menu():
     print("\n## GRADE CALCULATOR ##")
@@ -56,7 +71,7 @@ def main():
         if choice == "1":
             course_grade()
         elif choice == "2":
-            print("Score needed calculator coming soon.")
+            score_needed()
         elif choice == "3":
             print("GPA calculator coming soon.")
         elif choice == "4":

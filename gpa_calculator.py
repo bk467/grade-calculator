@@ -54,6 +54,39 @@ def score_needed():
     else:
         print("You need", round(needed, 2), "% on the exam, you got this bro")
 
+def gpa():
+    grade_points = {
+        "A+": 4.0, "A": 4.0, "A-": 3.7, "B+": 3.3, "B": 3.0, "B-": 2.7, "C+": 2.3, "C": 2.0, "C-": 1.7,
+        "D+": 1.3, "D": 1.0, "D-": 0.7, "F": 0.0,
+    } #using a hash map to attribute grade points to a letter grade instead of using a long if-else block
+
+    print("\nEnter your courses. Leave the name blank when you're done.")
+    total_credits = 0
+    total_points = 0
+
+    while True:
+        name = input("Course name: ").strip()
+        if name == "":
+            break
+        credits = ask_number("  Credit hours for " + name + ": ", 0.5, 10)
+
+        while True:
+            letter = input("  Letter grade for " + name + " (e.g. A, B+): ").strip().upper()
+            if letter in grade_points:
+                break
+            print("  Please enter a valid letter grade like A, B+, or C-.")
+
+        total_credits = total_credits + credits
+        total_points = total_points + credits * grade_points[letter]
+
+    if total_credits == 0:
+        print("No courses entered.")
+        return
+
+    result = total_points / total_credits
+    print("\nTotal credits:", total_credits)
+    print("GPA:", round(result, 2))
+
 
 def show_menu():
     print("\n## GRADE CALCULATOR ##")
@@ -73,7 +106,7 @@ def main():
         elif choice == "2":
             score_needed()
         elif choice == "3":
-            print("GPA calculator coming soon.")
+            gpa()
         elif choice == "4":
             print("See ya!")
             break

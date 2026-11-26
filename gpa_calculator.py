@@ -45,7 +45,7 @@ def score_needed():
     target = ask_number("Final grade you want (%): ", 0, 100)
 
     w = exam_weight / 100
-    needed = (target - current * (1 - w)) / w
+    needed = (target - current * (1 - w)) / w #Formula to calculate grade, looked this up because I couldn't come up with it on my own
 
     if needed > 100:
         print("You would need", round(needed, 2), "%, which is not possible LOL you're cooked")
